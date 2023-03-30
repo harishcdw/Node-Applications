@@ -1,28 +1,34 @@
-const fs1=require('fs');
-const fs = require('fs').promises;
+
+const fs=require('fs');
 const http = require('http');
 const url = require('url');
-let color_Palette_File = "./color_palette.json";
 
-http.createServer( async (req,res,err)=>{
-    let userFile = JSON.parse(fs1.readFileSync(color_Palette_File, "utf-8"));
-    let readFileSource;
-    if(req.url!="/favicon.ico"){
-        async function addfiles() {
-            for (let i = 0; i < 5; i++) {
-                randomValue = Math.floor(Math.random() * userFile.length);
-                await fs.appendFile("./randomized_color_ palette.json", "\n" + JSON.stringify(userFile[randomValue]));
+// reading json file
+let colorPaletteFile = "./color_palette.json";
+
+http.createServer((req,res)=>{
+
+    if(req.url != "/favicon.ico") {
+        fs.readFile(colorPaletteFile, "utf-8",(err,data)=>{
+            data=JSON.parse(data);
+            const randomSet = new Set();
+            while(randomSet.size<5) {
+                randomValue = Math.floor(Math.random() * data.length);
+                randomSet.add(randomValue);
             }
-
-            let random5Color = "./randomized_color_ palette.json";
-            readFileSource = await fs.readFile(random5Color, "utf-8");
-            console.log(readFileSource);
-        }
-        
-        await addfiles();
-        res.write(JSON.stringify(readFileSource));
-    }
-    res.end();
-    
+            // selecting random color palette from json file
+            let colorPalettes ='[';
+                
+            randomSet.forEach (function(value) {
+                colorPalettes+=JSON.stringify(data[value])+',\n';
+            })
+            colorPalettes+=']';
+            fs.writeFileSync("./randomized_color_ palette.json", colorPalettes);
+            fs.readFile("./randomized_color_ palette.json","utf-8",(err,data)=>{
+                res.write(data);
+                res.end();
+            })
+        });
+    } 
 }).listen(4000);
 
