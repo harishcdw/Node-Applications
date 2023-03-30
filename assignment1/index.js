@@ -1,18 +1,29 @@
-const fs1=require('fs');
-const fs = require('fs').promises;
+const fs=require('fs');
 
-let color_Palette_File = "./color_palette.json";
-let userFile = JSON.parse(fs1.readFileSync(color_Palette_File, "utf-8"));
-randomValue = Math.floor(Math.random() * userFile.length);
+// reading json file
+let colorPaletteFile = "./color_palette.json";
+let userFile = JSON.parse(fs.readFileSync(colorPaletteFile, "utf-8"));
 
-async function addfiles() {
-    for (let i = 0; i < 5; i++) {
-        await fs.appendFile("./randomized_color_ palette.json", "\n" + JSON.stringify(userFile[randomValue]));
-    }
-
-    let random5Color = "./randomized_color_ palette.json";
-    let readFileSource = fs1.readFileSync(random5Color, "utf-8");
-    
-    console.log(readFileSource);
+// selecting random color palette from json file
+let colorPalettes ='';
+const randomSet = new Set();
+while(randomSet.size<5) {
+    randomValue = Math.floor(Math.random() * userFile.length);
+    randomSet.add(randomValue);
 }
-addfiles();
+randomSet.forEach (function(value) {
+    colorPalettes+=JSON.stringify(userFile[value])+'\n';
+  })
+
+fs.writeFileSync("./randomized_color_ palette.json", colorPalettes);
+
+// Reading the file
+let random5Color = "./randomized_color_ palette.json";
+fs.readFile(random5Color, "utf-8",(err,data)=>{
+    if(err) console.log(err);
+    console.log(data);
+});
+
+
+
+
