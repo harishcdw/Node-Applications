@@ -1,0 +1,34 @@
+[
+  {
+    "color": "peacock",
+    "code": {
+      "hex": "#33A1C9"
+    },
+    "id": 142
+  },
+
+  {
+    "color": "cadetblue 4",
+    "code": {
+      "hex": "#53868B"
+    },
+    "id": 152
+  },
+
+  {
+    "color": "turquoise 1",
+    "code": {
+      "hex": "#00F5FF"
+    },
+    "id": 153
+  },
+
+
+  {
+    "color": "coldgrey",
+    "code": {
+      "hex": "#808A87"
+    },
+    "id": 185
+  }
+]

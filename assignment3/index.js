@@ -2,8 +2,23 @@
 const fs = require('fs');
 const http = require('http');
 const url = require('url');
+const colors = require('colors');
 const {randomSplice}=require("random-splice");
 require('dotenv').config();
+
+colors.setTheme({
+    silly: 'rainbow',
+    input: 'grey',
+    verbose: 'cyan',
+    prompt: 'grey',
+    info: 'green',
+    data: 'grey',
+    help: 'cyan',
+    warn: 'yellow',
+    debug: 'blue',
+    error: 'red'
+  });
+
 
 // reading json file
 let colorPaletteFile = "./color_palette.json";
@@ -13,6 +28,7 @@ async function readingFile(filePath) {
     try{
         let data = await fs.promises.readFile(filePath, "utf-8");
         data = JSON.parse(data);
+        
         if(data.length>=5){
             return data;
         }
@@ -44,11 +60,13 @@ http.createServer((req, res) => {
                     readingFile(randomColorPaletteFile).then(
                         (data1)=>{
                             res.write(JSON.stringify(data1));
+                            console.log(colors.debug("%s"),JSON.stringify(data1));
                             res.end();
                         }
                     ); 
                 } 
                 else{
+                    console.log("Data not sufficient".error);
                     res.write("Data not sufficient");
                     res.end();
                 }

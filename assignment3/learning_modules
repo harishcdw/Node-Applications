@@ -1,9 +1,0 @@
-PM2(Automatic restarts,Load balancing,Process monitoring,Logging,Deployment and rollback): A process manager that helps you manage and scale your Node.js applications
-
-Express: A popular web framework for Node.js that simplifies the process of building web applications.
-
-nodemailer: A library that allows you to send emails from your Node.js application.
-
-Node-RED: A flow-based programming tool that allows you to visually create and manage Node.js applications
-
-dotenv: A library that allows you to load environment variables from a .env file into your Node.js application.
