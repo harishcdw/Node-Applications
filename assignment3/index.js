@@ -3,6 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const url = require('url');
 const {randomSplice}=require("random-splice");
+require('dotenv').config();
 
 // reading json file
 let colorPaletteFile = "./color_palette.json";
@@ -54,6 +55,6 @@ http.createServer((req, res) => {
             }
         )
     }
-}).listen(4000);
+}).listen(process.env.PORT);
 
 

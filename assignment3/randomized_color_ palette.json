@@ -1,6 +1,1 @@
-[{"color":"teal*","code":{"hex":"#008080"},"id":180},
-{"color":"darkslategray","code":{"hex":"#2F4F4F"},"id":171},
-{"color":"cadetblue 1","code":{"hex":"#98F5FF"},"id":149},
-{"color":"lightcyan 2","code":{"hex":"#D1EEEE"},"id":164},
-{"color":"cyan / aqua*","code":{"hex":"#00FFFF"},"id":176},
-]
+[{"color":"darkslategray 4","code":{"hex":"#528B8B"},"id":175},{"color":"azure 2","code":{"hex":"#E0EEEE"},"id":160},{"color":"darkturquoise","code":{"hex":"#00CED1"},"id":158},{"color":"lightcyan 3","code":{"hex":"#B4CDCD"},"id":165},{"color":"azure 3","code":{"hex":"#C1CDCD"},"id":161}]
