@@ -1,34 +1,41 @@
-
-const fs=require('fs');
 const http = require('http');
-const url = require('url');
+let { readingFile } = require("./readingFile");
+const { writeFile } = require("./writingFile");
 
 // reading json file
-let colorPaletteFile = "./color_palette.json";
+let colorPaletteFile = "./color_palette1.json";
+let randomColorPaletteFile = "./randomized_color_ palette.json";
 
-http.createServer((req,res)=>{
 
-    if(req.url != "/favicon.ico") {
-        fs.readFile(colorPaletteFile, "utf-8",(err,data)=>{
-            data=JSON.parse(data);
+http.createServer(async (req, res) => {
+    if (req.url != "/favicon.ico") {
+        let colorPalettes = [];
+
+        await writeFile(randomColorPaletteFile, colorPalettes);
+        let data = await readingFile(colorPaletteFile);
+        if (data !== "Data not sufficient") {
             const randomSet = new Set();
-            while(randomSet.size<5) {
+            while (randomSet.size < 5) {
                 randomValue = Math.floor(Math.random() * data.length);
                 randomSet.add(randomValue);
             }
             // selecting random color palette from json file
-            let colorPalettes ='[';
-                
-            randomSet.forEach (function(value) {
-                colorPalettes+=JSON.stringify(data[value])+',\n';
-            })
-            colorPalettes+=']';
-            fs.writeFileSync("./randomized_color_ palette.json", colorPalettes);
-            fs.readFile("./randomized_color_ palette.json","utf-8",(err,data)=>{
-                res.write(data);
-                res.end();
-            })
-        });
-    } 
+            randomSet.forEach(function (value) {
+                colorPalettes.push(data[value]);
+            });
+            await writeFile(randomColorPaletteFile, colorPalettes);
+            let data1 = readingFile(randomColorPaletteFile);
+
+            res.write(JSON.stringify(data1));
+            res.end();
+
+        }
+        else {
+            res.write("Data not sufficient");
+            res.end();
+        }
+
+    }
 }).listen(4000);
+
 
