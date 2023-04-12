@@ -15,19 +15,8 @@ app.use(express.json());
 //   });
   
 
-
-const createRoute=require('./routes/create');
-app.use('/write',createRoute);
-
-const readRoute=require('./routes/read');
-app.use('/read',readRoute);
-
-const deleteRoute=require('./routes/delete');
-app.use('/delete',deleteRoute);
-
-const updateRoute=require('./routes/update');
-app.use('/update',updateRoute);
-
+const Buddy_Route=require('./routes/buddy.routes');
+app.use('/buddy',Buddy_Route);
 
 
 app.listen(port,()=>{
